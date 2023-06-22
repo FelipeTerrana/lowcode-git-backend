@@ -22,6 +22,10 @@ public class Controller {
 
         createFile(path, fileContent);
 
+        // TODO integração com o Git
+        // Fazer por linha de comando, ou considerar usar essa biblioteca:
+        // https://git-scm.com/book/pt-pt/v2/Appendix-B%3A-Incorporar-o-Git-nos-teus-Aplicativos-JGit
+
         return new HashMap<String, Object>() {
         {
             put("sucess", true);
