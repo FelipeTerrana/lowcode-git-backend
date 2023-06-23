@@ -66,17 +66,18 @@ public class Controller {
                 .call();
 
             // Set the author email
-            String authorName = "example"; //request.get("authorName");
-            String authorEmail = "example@example.com"; //request.get("authorEmail");
+            String authorEmail = request.get("authorEmail");// "example@example.com";
 
             git.commit()
-                .setAuthor(authorName, authorEmail)
+                .setAuthor(authorEmail, authorEmail)
                 .setMessage(request.get("path"))
                 .call();
 
-            git.push()
-                .setCredentialsProvider( new UsernamePasswordCredentialsProvider( "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", "" ) )
-                .call();
+
+            // 403
+            // git.push()
+            //     .setCredentialsProvider( new UsernamePasswordCredentialsProvider( "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", "" ) )
+            //     .call();
 
             System.out.println("Sucesso!");
             return createSuccessResponse();
