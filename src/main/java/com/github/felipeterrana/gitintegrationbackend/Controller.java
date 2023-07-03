@@ -13,6 +13,7 @@ import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-    @GetMapping("/blame")
+    @GetMapping("/blame/{path}")
     @ResponseBody
-    public Map<String, Object> blame(@RequestBody Map<String, String> request) {
+    public Map<String, Object> blame(@PathVariable String path) {
         try (Repository repository = new FileRepository(StartRepositoryRunner.REPOSITORY_DIR + "/.git"); Git git = new Git(repository)) {
             BlameResult blameResult = git.blame()
-                .setFilePath(request.get("path"))
+                .setFilePath(path)
                 .call();
 
             Map<Integer, String> blameData = new HashMap<>();
